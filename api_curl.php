@@ -3,7 +3,7 @@ function apiRequest(array $postData) {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, "https://yourapi.example.com"); // Replace with your endpoint
     curl_setopt($ch, CURLOPT_POST, true);
-	  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: YourTokenHere')); // Replace this with your auth token
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: YourTokenHere')); // Replace this with your auth token
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
     curl_setopt($ch, CURLOPT_TIMEOUT, 40); // may want to reduce this
     curl_setopt($ch, CURLOPT_USERAGENT, "Snusbase");
