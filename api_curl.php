@@ -23,5 +23,5 @@ function apiRequest(array $postData) {
 $postArray = Array("type" => $post_type, "term" => $post_term, "wildcard" => $wildcard, "limit" => $limit);
 
 // Passes array to function
-$response = apiRequest($postArray);
+$apiResponse = apiRequest($postArray);
 ?>
