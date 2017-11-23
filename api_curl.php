@@ -3,8 +3,6 @@
 // properly handle our API. For API access contact us through one of our support channels, and we
 // can make a deal depending on your usage case. API packages start at $80/month.
 
-
-
 function apiRequest(array $postData) {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, "https://yourapi.example.com"); // Replace with your endpoint
@@ -26,7 +24,7 @@ function apiRequest(array $postData) {
 }
 
 // Creates array from post form
-$postArray = Array("type" => $post_type, "term" => $post_term, "wildcard" => $wildcard, "limit" => $limit);
+$postArray = Array("type" => $post_type, "term" => $post_term, "wildcard" => $wildcard, "limit" => $limit, "offset" => $offset);
 
 // Passes array to function
 $apiResponse = apiRequest($postArray);
