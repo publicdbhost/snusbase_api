@@ -14,7 +14,7 @@ https://snusbase.com/documentation#api
 
 
 ## Curl
-curl -H "Content-Type: application/json" -H "Authorization: YourAuthToken" -X POST -d '{"type":"email","term":"test@example.com"}' https://yourapi.example.com
+`curl -H "Content-Type: application/json" -H "Authorization: YourAuthToken" -X POST -d '{"type":"email","term":"test@example.com"}' https://yourapi.example.com`
 
 
 ## api_curl.php
