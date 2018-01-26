@@ -5,12 +5,12 @@ Code examples for the snusbase.com API. Contributions will be rewarded with free
 https://snusbase.com/documentation#api
 
 
-## Optional parameters are:
-"wildcard": true/false - //example@% (% = infinite character wildcard) example@hotmail.___ (_ = wildcard only one character)
+### Optional parameters are:
+`"wildcard": true/false` - example@% (% = infinite character wildcard) example@hotmail.___ (_ = wildcard only one character)
 
-"limit": 25 - //limit how many results are shown
+`"limit": 25` - limit how many results are shown
 
-"offset": 25 - //if you want to do pagination. If limit = 25, you can set this to 25 to get 25 new results
+`"offset": 25` - if you want to do pagination. If limit = 25, you can set this to 25 to get 25 new results
 
 
 ## Curl
