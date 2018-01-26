@@ -6,7 +6,7 @@ https://snusbase.com/documentation#api
 
 
 ## Optional parameters are:
-"wildcard": true/false - // myname@% (% = infinite character wildcard) myname@hotmail.___ (_ = wildcard only one character)
+"wildcard": true/false - //example@% (% = infinite character wildcard) example@hotmail.___ (_ = wildcard only one character)
 
 "limit": 25 - //limit how many results are shown
 
