@@ -6,11 +6,11 @@ https://snusbase.com/documentation#api
 
 
 ## Optional parameters are:
-"wildcard": // myname@% (% = infinite character wildcard) myname@hotmail.___ (_ = wildcard only one character)
+"wildcard": true/false - // myname@% (% = infinite character wildcard) myname@hotmail.___ (_ = wildcard only one character)
 
-"limit": //limit how many results are shown
+"limit": 25 - //limit how many results are shown
 
-"offset": //if you want to do pagination. If limit = 25, you can set this to 25 to get 25 new results
+"offset": 25 - //if you want to do pagination. If limit = 25, you can set this to 25 to get 25 new results
 
 
 ## Curl
