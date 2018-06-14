@@ -3,7 +3,7 @@
 // properly handle our API. For API access contact us through one of our support channels, and we
 // can make a deal depending on your usage case. API packages start at $80/month.
 
-function search(array $postData, $url = "http://business.snusbase.com", $token, $timeout = "40") 
+function search(array $postData, $url = "http://business.snusbase.com", $token="YOUR_AUTHENTICATION_TOKEN_HERE", $timeout = "40") 
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -28,5 +28,6 @@ function search(array $postData, $url = "http://business.snusbase.com", $token, 
 $postData = Array("type" => $post_type, "term" => $post_term, "wildcard" => $wildcard, "limit" => $limit, "offset" => $offset);
 
 // Passes array to function
-$apiResponse = search($postData, "http://business.snusbase.com?names", "YOUR_AUTHENTICATION_TOKEN_HERE", 40);;
+$apiResponse = search($postData, "http://business.snusbase.com?names", "YOUR_AUTHENTICATION_TOKEN_HERE", 40);
+// If everything is correct in the function header use: $apiResponse = search($postData);
 ?>
