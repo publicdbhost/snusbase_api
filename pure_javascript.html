@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Snusbase API Sample Code</title>
+        <style>
+        *, ::after, ::before {
+            box-sizing: border-box;
+        }
+        body {
+            max-width: 1200px;
+            margin: 30px auto;
+            font-family: arial;
+            font-size: 0.9em;
+        }
+        label {
+            margin: 5px 0px 2px 0px;
+            display: block;
+        }
+        #responses {
+            width: 100%;
+            padding: 5px;
+            margin: 10px 0px 10px 0px;
+            border-radius: 4px;
+            background: #e2e2e2;
+            color: #000;
+            overflow-wrap: break-word;
+        }
+        #responses div {
+            padding: 10px 10px;
+            background: #fff;
+            margin: 0px 0px 5px 0px;
+        }
+        #stats {
+            background: #fff;
+            color: #000;
+            font-size: 1em;
+        }
+        </style>
+    </head>
+    <body>
+        <h3>Database Search Engine</h3>
+        <label for="searchtype">Select a search type</label>
+        <select name="searchtype" id="searchtype">
+            <option value="email">Email</option>
+            <option value="username">Username</option>
+            <option value="lastip">IP Address</option>
+            <option value="password">Password</option>
+            <option value="name">Full Name</option>
+            <option value="hash">Hash</option>
+        </select>
+        <label for="searchterm">Enter a search term</label>
+        <input name="searchterm" id="searchterm" type="text" value="" placeholder="Search term">
+        <input name="searchterm" id="apitoken" type="text" value="" placeholder="API Token">
+        <input type="submit" value="Search" onclick="searchHandler()">
+        <div id="stats"></div>
+        <div id="responses"></div>
+        <script>
+        // Official Snusbase sample code. This code is provided as-is and is only for refference of how to
+        // properly handle our API. For API access contact us through one of our support channels, and we
+        // can make a deal depending on your usage case. API packages start at $80/month.
+
+        let search = function(type, term, token, wildcard = false, limit = false, offset = 0) {
+            // The data to be included in the POST request,
+            // set when calling this function
+            query = {
+                "type": type,
+                "term": term,
+                "wildcard": wildcard,
+                "limit": limit,
+                "offset": offset
+            };
+
+            url = 'http://api.snusbase.com/v2/search';
+
+            return fetch(url, {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                },
+                body: JSON.stringify(query)
+            }).then((response) => response.json()).then((responseData) => { return responseData; }).catch(error => console.error('Oopsie: '+error));
+        }
+
+        // Only needed for the purpose of this example
+        let searchHandler = function() {
+            // Get value of inputs
+            var type = document.getElementById('searchtype').value;
+            var term = document.getElementById('searchterm').value;
+            var token = document.getElementById('apitoken').value;
+            // Give visible feedback so the user knows it's loading
+            document.getElementById('responses').innerHTML = '[loading]';
+            // Also wipe the old statistics to avoid confusion
+            document.getElementById('stats').innerHTML = '';
+            // Call search function
+            search(type, term, token).then(response => {
+                // Check for errors
+                if(response.error) {
+                    // Let the user know something went wrong
+                    document.getElementById('responses').innerHTML = '<div class="error">Error: ' + response.error + '</div>';
+                } else {
+                    // After results are fetched wipe old responses
+                    document.getElementById('responses').innerHTML = '';
+                    // Set statistics for new search
+                    document.getElementById('stats').innerHTML = '<p>Got '+response.result_size+' results in '+response.request_time+' seconds.</p>';
+                    // And add new responses
+                    response.result.forEach(function(output) {
+                        response = document.createElement('div');
+                        response.innerHTML = JSON.stringify(output);
+                        responses = document.getElementById('responses');
+                        responses.appendChild(response);
+                    })
+                }
+            }).catch(e => {
+                // Catch errors usually not related to the API
+                document.getElementById('responses').innerHTML = 'Error: '+e;
+            });
+        }
+        </script>
+    </body>
+</html>
