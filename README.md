@@ -14,4 +14,27 @@ A fully functional frontend example of how to use the Snusbase.com API and all a
 Example of how to use the Snusbase.com API in PHP. If you don't plan to use the optional features, simply set wildcard, limit and offset to "", null or false.
 
 ### Curl
-`curl -H "Content-Type: application/json" -H "Authorization: YourAuthToken" -X POST -d '{"type":"email","term":"test@test.com"}' http://api.snusbase.com/v2/search`
+
+#### Search by email
+
+```
+curl -H "Content-Type: application/json" -H "Authorization: YourAuthToken" -X POST -d '{"type":"email","term":"test@test.com"}' http://api.snusbase.com/v2/search
+```
+
+#### Search by email w/ wildcard
+
+```
+curl -H "Content-Type: application/json" -H "Authorization: YourAuthToken" -X POST -d '{"type":"email","term":"test@%","wildcard":"true"}' http://api.snusbase.com/v2/search
+```
+
+#### Search by email w/ limit
+
+```
+curl -H "Content-Type: application/json" -H "Authorization: YourAuthToken" -X POST -d '{"type":"email","term":"test@test.com","limit":"100"}' http://api.snusbase.com/v2/search
+```
+
+#### Search by email w/ limit & offset
+
+```
+curl -H "Content-Type: application/json" -H "Authorization: YourAuthToken" -X POST -d '{"type":"email","term":"test@test.com","limit":"100","offset":"100"}' http://api.snusbase.com/v2/search
+```
