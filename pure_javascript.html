@@ -15,8 +15,14 @@
             font-size: 0.9em;
         }
         label {
-            margin: 5px 0px 2px 0px;
+            margin: 8px 0px 2px 0px;
+            font-weight: bold;
             display: block;
+        }
+        input[type="submit"] {
+            display: block;
+            margin: 8px 0px 0px 0px;
+            padding: 3px 30px;
         }
         #responses {
             width: 100%;
@@ -50,9 +56,17 @@
             <option value="name">Full Name</option>
             <option value="hash">Hash</option>
         </select>
+		
+        <label for="wildcard">Enable Wildcard</label>
+        <input name="wildcard" id="wildcard" type="checkbox">
+
         <label for="searchterm">Enter a search term</label>
         <input name="searchterm" id="searchterm" type="text" value="" placeholder="Search term">
-        <input name="searchterm" id="apitoken" type="text" value="" placeholder="API Token">
+        <input name="apitoken" id="apitoken" type="text" value="" placeholder="API Token">
+
+        <label for="limit">Limits & Offset</label>
+        <input name="limit" id="limit" type="number" placeholder="Limit (number)">
+        <input name="offset" id="offset" type="number" placeholder="Offset (number)">
         <input type="submit" value="Search" onclick="searchHandler()">
         <div id="stats"></div>
         <div id="responses"></div>
@@ -60,16 +74,13 @@
         // Official Snusbase sample code. This code is provided as-is and is only for refference of how to
         // properly handle our API. For API access contact us through one of our support channels, and we
         // can make a deal depending on your usage case. API packages start at $80/month.
-
-        let search = function(type, term, token, wildcard = false, limit = false, offset = 0) {
-            // The data to be included in the POST request,
-            // set when calling this function
+        let search = function(type, term, token, wildcard, limit, offset) {
             query = {
-                "type": type,
-                "term": term,
-                "wildcard": wildcard,
-                "limit": limit,
-                "offset": offset
+                "type":type,
+                "term":term,
+                "limit":limit,
+                "offset":offset,
+                "wildcard":wildcard
             };
 
             url = 'http://api.snusbase.com/v2/search';
@@ -82,7 +93,7 @@
                     'Authorization': token
                 },
                 body: JSON.stringify(query)
-            }).then((response) => response.json()).then((responseData) => { return responseData; }).catch(error => console.error('Oopsie: '+error));
+            }).then((response) => response.json()).then((responseData) => { return responseData; }).catch(error => console.error('Error: '+error));
         }
 
         // Only needed for the purpose of this example
@@ -91,22 +102,31 @@
             var type = document.getElementById('searchtype').value;
             var term = document.getElementById('searchterm').value;
             var token = document.getElementById('apitoken').value;
+            var limit = document.getElementById('limit').value;
+            var offset = document.getElementById('offset').value;
+
+            if(document.getElementById('wildcard').checked) {
+                var wildcard = true;
+            } else {
+                var wildcard = false;
+            }
+			
             // Give visible feedback so the user knows it's loading
             document.getElementById('responses').innerHTML = '[loading]';
-            // Also wipe the old statistics to avoid confusion
-            document.getElementById('stats').innerHTML = '';
             // Call search function
-            search(type, term, token).then(response => {
+            search(type, term, token, wildcard, limit, offset).then(response => {
                 // Check for errors
                 if(response.error) {
                     // Let the user know something went wrong
                     document.getElementById('responses').innerHTML = '<div class="error">Error: ' + response.error + '</div>';
                 } else {
-                    // After results are fetched wipe old responses
+                    // After results are fetched wipe the response box
                     document.getElementById('responses').innerHTML = '';
-                    // Set statistics for new search
+
+                    // Settings result stats
                     document.getElementById('stats').innerHTML = '<p>Got '+response.result_size+' results in '+response.request_time+' seconds.</p>';
-                    // And add new responses
+                    
+                    // And add new responses (!!don't trust raw output!!)
                     response.result.forEach(function(output) {
                         response = document.createElement('div');
                         response.innerHTML = JSON.stringify(output);
@@ -114,8 +134,9 @@
                         responses.appendChild(response);
                     })
                 }
+
             }).catch(e => {
-                // Catch errors usually not related to the API
+                // Catch other errors
                 document.getElementById('responses').innerHTML = 'Error: '+e;
             });
         }
