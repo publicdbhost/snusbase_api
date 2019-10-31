@@ -28,6 +28,6 @@ function search(array $postData, $url = "http://business.snusbase.com", $token="
 $postData = Array("type" => $post_type, "term" => $post_term, "wildcard" => $wildcard, "limit" => $limit, "offset" => $offset);
 
 // Passes array to function
-$apiResponse = search($postData, "http://business.snusbase.com?names", "YOUR_AUTHENTICATION_TOKEN_HERE", 40);
+$apiResponse = search($postData, "http://api.snusbase.com/v2/search", "YOUR_AUTHENTICATION_TOKEN_HERE", 40);
 // If everything is correct in the function header use: $apiResponse = search($postData);
 ?>
