@@ -1,15 +1,17 @@
-# snusbase_api
-Code examples for the snusbase.com API. Contributions will be rewarded with free time depending on complexity of script.
+## Snusbase API
+Code examples for the snusbase.com API. Contributions will be rewarded with free time. If you need help simply contact us through one of the many support avenues available on our website.
 
-## API Documentation
-https://snusbase.com/documentation#api
+Documentation: https://snusbase.com/documentation
 
-## Curl
-`curl -H "Content-Type: application/json" -H "Authorization: YourAuthToken" -X POST -d '{"type":"email","term":"test@test.com"}' http://business.snusbase.com`
-
-## h8mail
+### H8mail (Python)
 "Email OSINT and password breach hunting. Use h8mail to find passwords through different breach and reconnaissance services[...]"
 https://github.com/khast3x/h8mail
 
-## api_curl.php
-Wildcard and limit are optional, leave blank if you're not using them. Alternatively wildcard can be toggled with false/true and limit can be set to any number you want
+### Pure_Javascript.html (JS)
+A fully functional frontend example of how to use the Snusbase.com API and all associated features in pure javascript. Leave wildcard unchecked and limit/offset empty if you're not planning on using them. To use as-is in nodejs, simply run `npm install --save node-fetch`.
+
+### Api_Curl.php (PHP)
+Example of how to use the Snusbase.com API in PHP. If you don't plan to use them you can set wildcard, limit and offset to '', null or false. Offset/limit only supports numeric values.
+
+### Curl
+`curl -H "Content-Type: application/json" -H "Authorization: YourAuthToken" -X POST -d '{"type":"email","term":"test@test.com"}' http://api.snusbase.com/v2/search`
