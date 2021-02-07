@@ -61,7 +61,7 @@
         <input name="wildcard" id="wildcard" type="checkbox">
 
         <label for="searchterm">Enter a search term</label>
-        <input name="searchterm" id="searchterm" type="text" value="" placeholder="Search term">
+        <input name="searchterm" id="searchterm" type="text" value="test@test.org" placeholder="Search term">
         <input name="apitoken" id="apitoken" type="text" value="" placeholder="API Token">
 
         <label for="limit">Limits & Offset</label>
@@ -83,7 +83,7 @@
                 "wildcard":wildcard
             };
 
-            url = 'http://api.snusbase.com/v2/search';
+            url = 'https://api.snusbase.com/v3/search';
 
             return fetch(url, {
                 method: "POST",
@@ -124,10 +124,10 @@
                     document.getElementById('responses').innerHTML = '';
 
                     // Settings result stats
-                    document.getElementById('stats').innerHTML = '<p>Got '+response.result_size+' results in '+response.request_time+' seconds.</p>';
+                    document.getElementById('stats').innerHTML = '<p>Found '+response.size+' results in '+response.took+' seconds.</p>';
                     
                     // And add new responses (!!don't trust raw output!!)
-                    response.result.forEach(function(output) {
+                    response.results.forEach(function(output) {
                         response = document.createElement('div');
                         response.innerHTML = JSON.stringify(output);
                         responses = document.getElementById('responses');
