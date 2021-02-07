@@ -13,7 +13,7 @@ You can currently search 6 fields ("**username**", "**email**", "**lastip**", "*
 
 By default we will display 8 fields ("**username**", "**email**", "**lastip**", "**hash**", "**salt**", "**password**", "**name**" and "**db**").
 
-* If you used API v2/v1 and you had logic for removing "", " ", and NULL fields, those are now parsed out on the backend.
+If you used API v2/v1 and you had logic for removing "", " ", and NULL fields, those are now parsed out on the backend.
 
 
 ### Errors
@@ -25,6 +25,7 @@ On the /v3/search endpoint we always respond with a "error" and a "reason" field
   "reason": "Search failed while waiting for backend"
 }
 ```
+
 
 ### Basic Search
 
@@ -50,6 +51,8 @@ curl -H "content-type: application/json" -H "authorization: API_KEY" -X POST -d 
   "size":2588
 }
 ```
+
+
 
 ### Wildcard Search
 
@@ -78,7 +81,9 @@ curl -H "content-type: application/json" -H "authorization: API_KEY" -X POST -d 
   "size":54577
 }
 ```
-* You can escape both the wildcard characters by prefixing them with a backslash ("\%", "\_").
+
+You can escape both the wildcard characters by prefixing them with a backslash ("\%", "\_").
+
 
 ### Limit/Offset Search
 
@@ -112,7 +117,9 @@ curl -H "content-type: application/json" -H "authorization: API_KEY" -X POST -d 
   "size":5
 }
 ```
-* Keep in mind this doesn't give you the full result count and does (almost) nothing to improve search performance, so we generally recommend you do this through software on your own frontend.
+
+Keep in mind this doesn't give you the full result count and does (almost) nothing to improve search performance, so we generally recommend you do this through software on your own frontend.
+
 
 ### Hash Lookup
 
@@ -136,6 +143,7 @@ curl -H "content-type: application/json" -H "authorization: API_KEY" -X POST -d 
   "password":"Password132"
 }
 ```
+
 
 ### IP Whois API
 
@@ -167,4 +175,4 @@ curl -H "content-type: application/json" -H "authorization: API_KEY" -X POST -d 
   "proxy":false
 }
 ```
-* If you pass a domain name as the "address" field, it will resolve it to an IP address and function the same way.
+If you pass a domain name as the "address" field, it will resolve it to an IP address and function the same way.
