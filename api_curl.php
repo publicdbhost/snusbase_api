@@ -1,14 +1,14 @@
 <?php
 // Official Snusbase sample code. This code is provided as-is and is only for refference of how to
-// properly handle our API. For API access contact us through one of our support channels, and we
-// can make a deal depending on your usage case. API packages start at $80/month.
+// handle our API. For API access contact customer support through email, and briefly describe your
+// use-case and we'll get back to you as soon as we can.
 
-function search(array $postData, $url = "http://business.snusbase.com", $token="YOUR_AUTHENTICATION_TOKEN_HERE", $timeout = "40") 
+function search(array $postData, $url = "https://api.snusbase.com/v3/search", $token="YOUR_AUTHENTICATION_TOKEN_HERE", $timeout = "40") 
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: '.$token));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('authorization: '.$token));
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
         curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
         curl_setopt($ch, CURLOPT_USERAGENT, "Snusbase");
@@ -24,10 +24,9 @@ function search(array $postData, $url = "http://business.snusbase.com", $token="
         }
     }
 
-// Creates array from post form
-$postData = Array("type" => $post_type, "term" => $post_term, "wildcard" => $wildcard, "limit" => $limit, "offset" => $offset);
+// Create the search query / array (feed your own data, eg $type = "email"; $term = "test@test.com", etc)
+$postData = Array("type" => $type, "term" => $term, "wildcard" => $wildcard, "limit" => $limit, "offset" => $offset);
 
-// Passes array to function
-$apiResponse = search($postData, "http://api.snusbase.com/v2/search", "YOUR_AUTHENTICATION_TOKEN_HERE", 40);
-// If everything is correct in the function header use: $apiResponse = search($postData);
+// Pass search query / array to search function, store response in $apiResponse
+$apiResponse = search($postData);
 ?>
